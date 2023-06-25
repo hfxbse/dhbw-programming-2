@@ -1,3 +1,7 @@
+import database.DatabaseParser;
+import database.people.PeopleRepository;
+
+import java.io.IOException;
 import java.util.Map;
 import java.io.File;
 
@@ -37,14 +41,14 @@ public class Main {
         File database = null;
         String argumentName = null;
 
-        for (String arg:args) {
+        for (String arg : args) {
             String argumentPattern = argumentValidator.findPattern(args[0]);
-            if(argumentPattern == null) {
+            if (argumentPattern == null) {
                 System.err.printf("Unexpected argument %s. Valid options are:%n%s%n", args[0], getArgumentDescription());
                 System.exit(2);
             }
 
-            if(getArgumentName(arg).equals("database")) {
+            if (getArgumentName(arg).equals("database")) {
                 database = new File(getArgumentValue(arg));
             } else {
                 argumentName = getArgumentName(arg);
@@ -65,6 +69,16 @@ public class Main {
                     getArgumentDescription()
             );
             System.exit(4);
+        }
+
+        PeopleRepository peopleRepository = new PeopleRepository();
+
+        try {
+            DatabaseParser.parse(database, Map.of(
+                    PeopleRepository.DATABASE_ENTRY_PATTERN, peopleRepository
+            ));
+        } catch (IOException e) {
+            System.err.printf("Could not read database file %s.%n", database.getName());
         }
     }
 }
