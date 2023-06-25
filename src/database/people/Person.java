@@ -1,9 +1,10 @@
 package database.people;
 
-public class Person {
+import database.Entry;
+
+public class Person extends Entry {
     public Person(Integer id, String name, Gender gender) {
-        this.id = id;
-        this.name = name;
+        super(id, name);
         this.gender = gender;
     }
 
@@ -12,10 +13,7 @@ public class Person {
         FEMALE
     }
 
-    public Integer id;
-    public String name;
     public Gender gender;
-
 
     @Override
     public String toString() {

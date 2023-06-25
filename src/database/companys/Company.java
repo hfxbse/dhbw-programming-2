@@ -1,12 +1,10 @@
 package database.companys;
 
-public class Company {
-    public Integer id;
-    public String name;
+import database.Entry;
 
+public class Company extends Entry {
     public Company(Integer id, String name) {
-        this.id = id;
-        this.name = name;
+        super(id, name);
     }
 
     @Override
