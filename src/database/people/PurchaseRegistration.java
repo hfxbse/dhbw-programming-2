@@ -1,7 +1,6 @@
-package database.purchases;
+package database.people;
 
 import database.EntryRegistration;
-import database.people.PeopleRepository;
 import database.products.ProductRepository;
 
 public class PurchaseRegistration implements EntryRegistration {

@@ -1,12 +1,13 @@
 import database.DatabaseParser;
 import database.companys.Company;
 import database.companys.CompanyRepository;
-import database.friendships.FriendshipRegistration;
+import database.companys.ManufactureRegistration;
+import database.people.FriendshipRegistration;
 import database.people.Person;
 import database.products.Product;
 import database.products.ProductRepository;
 import database.people.PeopleRepository;
-import database.purchases.PurchaseRegistration;
+import database.people.PurchaseRegistration;
 
 import java.io.IOException;
 import java.util.Map;
@@ -89,7 +90,8 @@ public class Main {
                     CompanyRepository.DATABASE_ENTRY_PATTERN, companies,
                     ProductRepository.DATABASE_ENTRY_PATTERN, products,
                     FriendshipRegistration.DATABASE_ENTRY_PATTERN, new FriendshipRegistration(people),
-                    PurchaseRegistration.DATABASE_ENTRY_PATTERN, new PurchaseRegistration(people, products)
+                    PurchaseRegistration.DATABASE_ENTRY_PATTERN, new PurchaseRegistration(people, products),
+                    ManufactureRegistration.DATABASE_ENTRY_PATTERN, new ManufactureRegistration(companies, products)
             ));
         } catch (IOException e) {
             System.err.printf("Could not read database file %s.%n", database.getName());
