@@ -1,10 +1,7 @@
 import database.DatabaseParser;
-import database.companys.Company;
 import database.companys.CompanyRepository;
 import database.companys.ManufactureRegistration;
 import database.people.FriendshipRegistration;
-import database.people.Person;
-import database.products.Product;
 import database.products.ProductRepository;
 import database.people.PeopleRepository;
 import database.people.PurchaseRegistration;
@@ -17,6 +14,7 @@ public class Main {
     static final Map<String, String> arguments = Map.of(
             "--personensuche=.+", "person name",
             "--produktsuche=.+", "product name",
+            "--firmensuche=.+", "company name",
             "--produktnetzwerk=\\d+", "product ID",
             "--firmennetzwerk=\\d+", "company ID",
             "--database=.+", "file"
@@ -47,7 +45,7 @@ public class Main {
         }
 
         File database = null;
-        String argumentName = null;
+        String argumentName = null, argumentValue = "";
 
         for (String arg : args) {
             String argumentPattern = argumentValidator.findPattern(args[0]);
@@ -60,6 +58,7 @@ public class Main {
                 database = new File(getArgumentValue(arg));
             } else {
                 argumentName = getArgumentName(arg);
+                argumentValue = getArgumentValue(arg);
             }
         }
 
@@ -97,16 +96,10 @@ public class Main {
             System.err.printf("Could not read database file %s.%n", database.getName());
         }
 
-        for (Person person : people) {
-            System.out.println(person);
-        }
-
-        for (Company company : companies) {
-            System.out.println(company);
-        }
-
-        for (Product product : products) {
-            System.out.println(product);
+        switch (argumentName) {
+            case "personensuche" -> System.out.println(people.findByName(argumentValue));
+            case "produktsuche" -> System.out.println(products.findByName(argumentValue));
+            case "firmensuche" -> System.out.println(companies.findByName(argumentValue));
         }
     }
 }

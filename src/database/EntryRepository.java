@@ -1,12 +1,9 @@
 package database;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Spliterator;
+import java.util.*;
 import java.util.function.Consumer;
 
-abstract public class EntryRepository<T> implements EntryRegistration, Iterable<T> {
+abstract public class EntryRepository<T extends Entry> implements EntryRegistration, Iterable<T> {
     final private Map<Integer, T> entries = new HashMap<>();
 
     public abstract T createEntry(Integer id, String[] data);
@@ -22,6 +19,12 @@ abstract public class EntryRepository<T> implements EntryRegistration, Iterable<
 
     public T getById(Integer id) {
         return entries.get(id);
+    }
+
+    public List<T> findByName(String query) {
+        return entries.values().stream()
+                .filter(entry -> entry.name.toLowerCase().contains(query.toLowerCase()))
+                .toList();
     }
 
     @Override
