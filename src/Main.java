@@ -6,6 +6,7 @@ import database.people.Person;
 import database.products.Product;
 import database.products.ProductRepository;
 import database.people.PeopleRepository;
+import database.purchases.PurchaseRegistration;
 
 import java.io.IOException;
 import java.util.Map;
@@ -77,31 +78,32 @@ public class Main {
             System.exit(4);
         }
 
-        PeopleRepository peopleRepository = new PeopleRepository();
-        CompanyRepository companyRepository = new CompanyRepository();
-        ProductRepository productRepository = new ProductRepository();
+        PeopleRepository people = new PeopleRepository();
+        CompanyRepository companies = new CompanyRepository();
+        ProductRepository products = new ProductRepository();
 
 
         try {
             DatabaseParser.parse(database, Map.of(
-                    PeopleRepository.DATABASE_ENTRY_PATTERN, peopleRepository,
-                    CompanyRepository.DATABASE_ENTRY_PATTERN, companyRepository,
-                    ProductRepository.DATABASE_ENTRY_PATTERN, productRepository,
-                    FriendshipRegistration.DATABASE_ENTRY_PATTERN, new FriendshipRegistration(peopleRepository)
+                    PeopleRepository.DATABASE_ENTRY_PATTERN, people,
+                    CompanyRepository.DATABASE_ENTRY_PATTERN, companies,
+                    ProductRepository.DATABASE_ENTRY_PATTERN, products,
+                    FriendshipRegistration.DATABASE_ENTRY_PATTERN, new FriendshipRegistration(people),
+                    PurchaseRegistration.DATABASE_ENTRY_PATTERN, new PurchaseRegistration(people, products)
             ));
         } catch (IOException e) {
             System.err.printf("Could not read database file %s.%n", database.getName());
         }
 
-        for (Person person : peopleRepository) {
+        for (Person person : people) {
             System.out.println(person);
         }
 
-        for (Company company : companyRepository) {
+        for (Company company : companies) {
             System.out.println(company);
         }
 
-        for (Product product : productRepository) {
+        for (Product product : products) {
             System.out.println(product);
         }
     }
