@@ -16,7 +16,7 @@ import java.util.Map;
 public class Main {
     private final static ArgumentParser argumentParser = new ArgumentParser(
             new ArgumentPattern[]{
-                    new ArgumentPattern("database", "file")
+                    new ArgumentPattern("datenbank", "file")
             },
             new ArgumentPattern[]{
                 new ArgumentPattern("personensuche", "person's name"),
@@ -37,8 +37,8 @@ public class Main {
         CompanyRepository companies = new CompanyRepository();
         ProductRepository products = new ProductRepository();
 
-        final File database = new File(arguments.get("database"));
-        arguments.remove("database");
+        final File database = new File(arguments.get("datenbank"));
+        arguments.remove("datenbank");
 
         try {
             DatabaseParser.parse(database, Map.of(

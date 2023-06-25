@@ -12,18 +12,18 @@ public class ProjektTester {
         boolean passed = true;
 
         // Produktnetzwerk fuer Jaime Rogers
-        passed = passedTestNetzwerk(new String[]{"--produktnetzwerk=53", "--database=./productproject2023.db"}, "iPad Mini,MacBook Air,Samsung Galaxy 5");
+        passed = passedTestNetzwerk(new String[]{"--produktnetzwerk=53", "--datenbank=./productproject2023.db"}, "iPad Mini,MacBook Air,Samsung Galaxy 5");
         // Produktnetzwerk fuer Roger Walker
-        passed &= passedTestNetzwerk(new String[]{"--produktnetzwerk=70", "--database=./productproject2023.db"}, "iPad,Samsung ChromeBook,Samsung Galaxy Tab 3");
+        passed &= passedTestNetzwerk(new String[]{"--produktnetzwerk=70", "--datenbank=./productproject2023.db"}, "iPad,Samsung ChromeBook,Samsung Galaxy Tab 3");
         // Produktnetzwerk fuer Brandy Francis
-        passed &= passedTestNetzwerk(new String[]{"--produktnetzwerk=181", "--database=./productproject2023.db"}, "Google Nexus 7,iPad,MacBook Air,Samsung Galaxy 5,Samsung Galaxy Tab 3");
+        passed &= passedTestNetzwerk(new String[]{"--produktnetzwerk=181", "--datenbank=./productproject2023.db"}, "Google Nexus 7,iPad,MacBook Air,Samsung Galaxy 5,Samsung Galaxy Tab 3");
 
         // Firmennetzwerk fuer Jaime Rogers
-        passed &= passedTestNetzwerk(new String[]{"--firmennetzwerk=53", "--database=./productproject2023.db"}, "Apple");
+        passed &= passedTestNetzwerk(new String[]{"--firmennetzwerk=53", "--datenbank=./productproject2023.db"}, "Apple");
         // Firmennetzwerk fuer Roger Walker
-        passed &= passedTestNetzwerk(new String[]{"--firmennetzwerk=70", "--database=./productproject2023.db"}, "Apple,Samsung");
+        passed &= passedTestNetzwerk(new String[]{"--firmennetzwerk=70", "--datenbank=./productproject2023.db"}, "Apple,Samsung");
         // Firmennetzwerk fuer Brandy Francis
-        passed &= passedTestNetzwerk(new String[]{"--firmennetzwerk=181", "--database=./productproject2023.db"}, "Apple,Google");
+        passed &= passedTestNetzwerk(new String[]{"--firmennetzwerk=181", "--datenbank=./productproject2023.db"}, "Apple,Google");
 
         if (passed) {
             System.out.println("Alle Tests bestanden :-)");
