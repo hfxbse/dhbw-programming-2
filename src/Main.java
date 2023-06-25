@@ -7,6 +7,7 @@ import database.people.PeopleRepository;
 import database.people.PurchaseRegistration;
 
 import java.io.IOException;
+import java.util.Comparator;
 import java.util.Map;
 import java.io.File;
 
@@ -15,8 +16,8 @@ public class Main {
             "--personensuche=.+", "person name",
             "--produktsuche=.+", "product name",
             "--firmensuche=.+", "company name",
-            "--produktnetzwerk=\\d+", "product ID",
-            "--firmennetzwerk=\\d+", "company ID",
+            "--produktnetzwerk=\\d+", "person ID",
+            "--firmennetzwerk=\\d+", "person ID",
             "--database=.+", "file"
     );
 
@@ -78,10 +79,10 @@ public class Main {
             System.exit(4);
         }
 
+
         PeopleRepository people = new PeopleRepository();
         CompanyRepository companies = new CompanyRepository();
         ProductRepository products = new ProductRepository();
-
 
         try {
             DatabaseParser.parse(database, Map.of(
@@ -100,6 +101,22 @@ public class Main {
             case "personensuche" -> System.out.println(people.findByName(argumentValue));
             case "produktsuche" -> System.out.println(products.findByName(argumentValue));
             case "firmensuche" -> System.out.println(companies.findByName(argumentValue));
+            case "produktnetzwerk" -> System.out.println(String.join(",",
+                    people.getById(Integer.parseInt(argumentValue))
+                            .productNetwork()
+                            .stream()
+                            .map(product -> product.name)
+                            .sorted(Comparator.comparing(String::toLowerCase))
+                            .toList()
+            ));
+            case "firmennetzwerk" -> System.out.println(String.join(",",
+                    people.getById(Integer.parseInt(argumentValue))
+                            .companyNetwork(companies)
+                            .stream()
+                            .map(company -> company.name)
+                            .sorted(Comparator.comparing(String::toLowerCase))
+                            .toList()
+            ));
         }
     }
 }

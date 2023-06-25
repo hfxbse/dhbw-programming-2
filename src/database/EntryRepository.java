@@ -4,7 +4,7 @@ import java.util.*;
 import java.util.function.Consumer;
 
 abstract public class EntryRepository<T extends Entry> implements EntryRegistration, Iterable<T> {
-    final private Map<Integer, T> entries = new HashMap<>();
+    final protected Map<Integer, T> entries = new HashMap<>();
 
     public abstract T createEntry(Integer id, String[] data);
 

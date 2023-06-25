@@ -1,6 +1,8 @@
 package database.people;
 
 import database.Entry;
+import database.companys.Company;
+import database.companys.CompanyRepository;
 import database.products.Product;
 
 import java.util.HashSet;
@@ -21,6 +23,30 @@ public class Person extends Entry {
 
     final public Set<Person> friends = new HashSet<>();
     final public Set<Product> purchases = new HashSet<>();
+
+    public Set<Product> productNetwork() {
+        final Set<Product> products = new HashSet<>();
+
+        for (Person friend : friends) {
+            products.addAll(friend.purchases);
+        }
+
+        products.removeAll(purchases);
+
+        return products;
+    }
+
+    public Set<Company> companyNetwork(CompanyRepository companyRepository) {
+        final Set<Company> companies = new HashSet<>();
+
+        for (Product product : productNetwork()) {
+            companies.add(companyRepository.findManufacture(product));
+        }
+
+        purchases.stream().map(companyRepository::findManufacture).forEach(companies::remove);
+
+        return companies;
+    }
 
     @Override
     public String toString() {
