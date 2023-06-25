@@ -20,7 +20,7 @@ public class FriendshipRegistration implements EntryRegistration {
             people.getById(first).friends.add(people.getById(second));
             people.getById(second).friends.add(people.getById(first));
         } catch (NullPointerException e) {
-            throw new RuntimeException("At least one person in friendship do not exist at this point.", e);
+            throw new RuntimeException("At least one person in friendship does not exist at this point.", e);
         }
     }
 }
