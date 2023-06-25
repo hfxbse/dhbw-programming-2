@@ -1,4 +1,5 @@
 import database.DatabaseParser;
+import database.companys.CompanyRepository;
 import database.people.PeopleRepository;
 
 import java.io.IOException;
@@ -72,10 +73,12 @@ public class Main {
         }
 
         PeopleRepository peopleRepository = new PeopleRepository();
+        CompanyRepository companyRepository = new CompanyRepository();
 
         try {
             DatabaseParser.parse(database, Map.of(
-                    PeopleRepository.DATABASE_ENTRY_PATTERN, peopleRepository
+                    PeopleRepository.DATABASE_ENTRY_PATTERN, peopleRepository,
+                    CompanyRepository.DATABASE_ENTRY_PATTERN, companyRepository
             ));
         } catch (IOException e) {
             System.err.printf("Could not read database file %s.%n", database.getName());
