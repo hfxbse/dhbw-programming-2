@@ -1,5 +1,9 @@
 import database.DatabaseParser;
+import database.companys.Company;
 import database.companys.CompanyRepository;
+import database.friendships.FriendshipRegistration;
+import database.people.Person;
+import database.products.Product;
 import database.products.ProductRepository;
 import database.people.PeopleRepository;
 
@@ -77,14 +81,28 @@ public class Main {
         CompanyRepository companyRepository = new CompanyRepository();
         ProductRepository productRepository = new ProductRepository();
 
+
         try {
             DatabaseParser.parse(database, Map.of(
                     PeopleRepository.DATABASE_ENTRY_PATTERN, peopleRepository,
                     CompanyRepository.DATABASE_ENTRY_PATTERN, companyRepository,
-                    ProductRepository.DATABASE_ENTRY_PATTERN, productRepository
+                    ProductRepository.DATABASE_ENTRY_PATTERN, productRepository,
+                    FriendshipRegistration.DATABASE_ENTRY_PATTERN, new FriendshipRegistration(peopleRepository)
             ));
         } catch (IOException e) {
             System.err.printf("Could not read database file %s.%n", database.getName());
+        }
+
+        for (Person person : peopleRepository) {
+            System.out.println(person);
+        }
+
+        for (Company company : companyRepository) {
+            System.out.println(company);
+        }
+
+        for (Product product : productRepository) {
+            System.out.println(product);
         }
     }
 }
