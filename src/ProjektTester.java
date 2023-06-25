@@ -12,18 +12,18 @@ public class ProjektTester {
         boolean passed = true;
 
         // Produktnetzwerk fuer Jaime Rogers
-        passed = passedTestNetzwerk("--produktnetzwerk=53", "iPad Mini,MacBook Air,Samsung Galaxy 5");
+        passed = passedTestNetzwerk(new String[]{"--produktnetzwerk=53", "--database=./productproject2023.db"}, "iPad Mini,MacBook Air,Samsung Galaxy 5");
         // Produktnetzwerk fuer Roger Walker
-        passed &= passedTestNetzwerk("--produktnetzwerk=70", "iPad,Samsung ChromeBook,Samsung Galaxy Tab 3");
+        passed &= passedTestNetzwerk(new String[]{"--produktnetzwerk=70", "--database=./productproject2023.db"}, "iPad,Samsung ChromeBook,Samsung Galaxy Tab 3");
         // Produktnetzwerk fuer Brandy Francis
-        passed &= passedTestNetzwerk("--produktnetzwerk=181", "Google Nexus 7,iPad,MacBook Air,Samsung Galaxy 5,Samsung Galaxy Tab 3");
+        passed &= passedTestNetzwerk(new String[]{"--produktnetzwerk=181", "--database=./productproject2023.db"}, "Google Nexus 7,iPad,MacBook Air,Samsung Galaxy 5,Samsung Galaxy Tab 3");
 
         // Firmennetzwerk fuer Jaime Rogers
-        passed &= passedTestNetzwerk("--firmennetzwerk=53", "Apple");
+        passed &= passedTestNetzwerk(new String[]{"--firmennetzwerk=53", "--database=./productproject2023.db"}, "Apple");
         // Firmennetzwerk fuer Roger Walker
-        passed &= passedTestNetzwerk("--firmennetzwerk=70", "Apple,Samsung");
+        passed &= passedTestNetzwerk(new String[]{"--firmennetzwerk=70", "--database=./productproject2023.db"}, "Apple,Samsung");
         // Firmennetzwerk fuer Brandy Francis
-        passed &= passedTestNetzwerk("--firmennetzwerk=181", "Apple,Google");
+        passed &= passedTestNetzwerk(new String[]{"--firmennetzwerk=181", "--database=./productproject2023.db"}, "Apple,Google");
 
         if (passed) {
             System.out.println("Alle Tests bestanden :-)");
@@ -35,16 +35,16 @@ public class ProjektTester {
     /**
      * Ueberprueft ob Aufruf den erwarteten Ausgabestring beinhaltet.
      *
-     * @param arg          Programmargument
+     * @param args          Programmargument
      * @param resultString String, welcher als Ausgabe erwartet wird
      * @return
      */
-    private static boolean passedTestNetzwerk(String arg, String resultString) {
+    private static boolean passedTestNetzwerk(String[] args, String resultString) {
         // Der System.out Stream muss umgebogen werden, damit dieser spaeter ueberprueft werden kann.
         PrintStream normalerOutput = System.out;
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(baos));
-        String[] args = {arg};
+
         try {
             // MainClass mittels Reflection bekommen und main Methode aufrufen
             Class<?> mainClass = Class.forName(MAIN_CLASS);
@@ -69,7 +69,7 @@ public class ProjektTester {
                 return true;
             }
         }
-        System.err.println("Feher bei: '" + arg + "'. Erwartetes Ergebnis: '" + resultString + "', erhaltenes Ergebnis: '" + output.replace(System.lineSeparator(), "") + "'");
+        System.err.println("Feher bei: '" + String.join(" ", args) + "'. Erwartetes Ergebnis: '" + resultString + "', erhaltenes Ergebnis: '" + output.replace(System.lineSeparator(), "") + "'");
         return false;
     }
 
