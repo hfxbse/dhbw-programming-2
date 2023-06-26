@@ -1,4 +1,4 @@
-package test;
+package test.arguments;
 
 import main.arguments.ArgumentParser;
 import main.arguments.ArgumentPattern;
@@ -7,11 +7,10 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ArgumentParserTest {
-    final ArgumentParser parser = new ArgumentParser(
+    final static ArgumentParser parser = new ArgumentParser(
             new ArgumentPattern[]{
                     new ArgumentPattern("required1", "required1"),
                     new ArgumentPattern("required2", "required2", true),
@@ -61,18 +60,25 @@ public class ArgumentParserTest {
     @Test
     @DisplayName("Returns key value map of parsed parameters")
     void validParametersMap() {
-        Map<String, String> parameters = parser
+        final Map<String, String> firstOption = parser
                 .parse(new String[]{"--required1=first", "--required2=2", "--either1=third"});
 
-        assertEquals("first", parameters.get("required1"));
-        assertEquals("2", parameters.get("required2"));
-        assertEquals("third", parameters.get("either1"));
-        assertNull(parameters.get("either2"));
+        final Map<String, String> secondOption = parser
+                .parse(new String[]{"--required1=first", "--required2=2", "--either2=3"});
 
-        parameters = parser.parse(new String[]{"--required1=first", "--required2=2", "--either2=3"});
-        assertEquals("first", parameters.get("required1"));
-        assertEquals("2", parameters.get("required2"));
-        assertEquals("3", parameters.get("either2"));
-        assertNull(parameters.get("either1"));
+        assertAll(
+                "Key value map assertion option 1.",
+                () -> assertEquals("first", firstOption.get("required1")),
+                () -> assertEquals("2", firstOption.get("required2")),
+                () -> assertEquals("third", firstOption.get("either1")),
+                () -> assertNull(firstOption.get("either2"))
+        );
+        assertAll(
+                "Key value map assertion option 2.",
+                () -> assertEquals("first", secondOption.get("required1")),
+                () -> assertEquals("2", secondOption.get("required2")),
+                () -> assertEquals("3", secondOption.get("either2")),
+                () -> assertNull(secondOption.get("either1"))
+        );
     }
 }
