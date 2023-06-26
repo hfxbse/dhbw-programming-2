@@ -1,6 +1,6 @@
 package main.database;
 
-abstract public class Entry {
+public class Entry {
     public Integer id;
     public String name;
 
