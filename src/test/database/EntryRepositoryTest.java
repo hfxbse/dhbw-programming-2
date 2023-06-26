@@ -67,9 +67,9 @@ public class EntryRepositoryTest {
     }
 
     @Test
-    @DisplayName("Finds both entry when searching for \"s\"")
+    @DisplayName("Finds both entry when searching for \"S\"")
     void findByQuery() {
-        final List<Entry> result = repository.findByName("s");
+        final List<Entry> result = repository.findByName("S");
         assertEquals(List.of(repository.getById(0), repository.getById(1)), result);
     }
 
