@@ -1,4 +1,4 @@
-package test.database;
+package test.database.companys;
 
 import main.database.companys.Company;
 import main.database.companys.CompanyRepository;

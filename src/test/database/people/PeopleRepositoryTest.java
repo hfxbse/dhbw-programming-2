@@ -1,4 +1,4 @@
-package test.database;
+package test.database.people;
 
 import main.database.people.PeopleRepository;
 import main.database.people.Person;
