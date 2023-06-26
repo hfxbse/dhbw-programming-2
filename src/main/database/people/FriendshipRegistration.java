@@ -1,6 +1,6 @@
-package database.people;
+package main.database.people;
 
-import database.EntryRegistration;
+import main.database.EntryRegistration;
 
 public class FriendshipRegistration implements EntryRegistration {
     public static final String DATABASE_ENTRY_PATTERN = "\"person1_id\",\"person2_id\"";

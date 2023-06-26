@@ -1,4 +1,4 @@
-package arguments;
+package main.arguments;
 
 import java.util.*;
 import java.util.regex.Pattern;
@@ -20,7 +20,7 @@ public class ArgumentParser {
     String getArgumentDescription(Collection<ArgumentPattern> patterns) {
         return String.join("\n", patterns
                 .stream()
-                .map(pattern -> String.format("--%s<%s>", pattern.key, pattern.valueDescription))
+                .map(pattern -> String.format("--%s=<%s>", pattern.key, pattern.valueDescription))
                 .toList()
         );
     }
@@ -94,7 +94,7 @@ public class ArgumentParser {
 
         if (!missingKeys.isEmpty()) {
             System.err.printf(
-                    "The following required arguments where missing:%n%s%n",
+                    "The following required main.arguments where missing:%n%s%n",
                     getArgumentDescription(required
                             .keySet()
                             .stream()
@@ -112,6 +112,7 @@ public class ArgumentParser {
     private String getArgumentKey(String argument) {
         return argument.substring(2, argument.indexOf('='));
     }
+
     private String getArgumentValue(String argument) {
         return argument.substring(argument.indexOf("=") + 1).trim();
     }

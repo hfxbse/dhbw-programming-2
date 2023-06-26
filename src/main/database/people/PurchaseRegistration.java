@@ -1,7 +1,7 @@
-package database.people;
+package main.database.people;
 
-import database.EntryRegistration;
-import database.products.ProductRepository;
+import main.database.EntryRegistration;
+import main.database.products.ProductRepository;
 
 public class PurchaseRegistration implements EntryRegistration {
     public static final String DATABASE_ENTRY_PATTERN = "\"person_id\",\"product_id\"";

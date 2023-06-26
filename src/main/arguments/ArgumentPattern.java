@@ -1,4 +1,4 @@
-package arguments;
+package main.arguments;
 
 public class ArgumentPattern {
     String key;

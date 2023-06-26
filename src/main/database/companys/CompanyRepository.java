@@ -1,7 +1,7 @@
-package database.companys;
+package main.database.companys;
 
-import database.EntryRepository;
-import database.products.Product;
+import main.database.EntryRepository;
+import main.database.products.Product;
 
 public class CompanyRepository extends EntryRepository<Company> {
     public static final String DATABASE_ENTRY_PATTERN = "\"company_id\",\"company_name\"";

@@ -1,4 +1,4 @@
-package database;
+package main.database;
 
 abstract public class Entry {
     public Integer id;

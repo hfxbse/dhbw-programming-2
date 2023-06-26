@@ -1,7 +1,7 @@
-package database.people;
+package main.database.people;
 
-import database.EntryRepository;
-import database.people.Person.Gender;
+import main.database.EntryRepository;
+import main.database.people.Person.Gender;
 
 public class PeopleRepository extends EntryRepository<Person> {
     public static final String DATABASE_ENTRY_PATTERN = "\"person_id\", \"person_name\", \"person_gender\"";

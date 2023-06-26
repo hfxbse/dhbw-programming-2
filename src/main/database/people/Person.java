@@ -1,9 +1,9 @@
-package database.people;
+package main.database.people;
 
-import database.Entry;
-import database.companys.Company;
-import database.companys.CompanyRepository;
-import database.products.Product;
+import main.database.Entry;
+import main.database.companys.Company;
+import main.database.companys.CompanyRepository;
+import main.database.products.Product;
 
 import java.util.HashSet;
 import java.util.Set;

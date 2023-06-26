@@ -1,12 +1,14 @@
-import arguments.ArgumentParser;
-import arguments.ArgumentPattern;
-import database.DatabaseParser;
-import database.companys.CompanyRepository;
-import database.companys.ManufactureRegistration;
-import database.people.FriendshipRegistration;
-import database.products.ProductRepository;
-import database.people.PeopleRepository;
-import database.people.PurchaseRegistration;
+package main;
+
+import main.arguments.ArgumentParser;
+import main.arguments.ArgumentPattern;
+import main.database.DatabaseParser;
+import main.database.companys.CompanyRepository;
+import main.database.companys.ManufactureRegistration;
+import main.database.people.FriendshipRegistration;
+import main.database.products.ProductRepository;
+import main.database.people.PeopleRepository;
+import main.database.people.PurchaseRegistration;
 
 import java.io.File;
 import java.io.IOException;
@@ -50,7 +52,7 @@ public class Main {
                     ManufactureRegistration.DATABASE_ENTRY_PATTERN, new ManufactureRegistration(companies, products)
             ));
         } catch (IOException e) {
-            System.err.printf("Could not read database file %s.%n", database.getName());
+            System.err.printf("Could not read main.database file %s.%n", database.getName());
         }
 
         final String key = (String) arguments.keySet().toArray()[0];

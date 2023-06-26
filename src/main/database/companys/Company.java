@@ -1,7 +1,7 @@
-package database.companys;
+package main.database.companys;
 
-import database.Entry;
-import database.products.Product;
+import main.database.Entry;
+import main.database.products.Product;
 
 import java.util.HashSet;
 import java.util.Set;

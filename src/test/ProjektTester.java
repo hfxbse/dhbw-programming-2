@@ -1,3 +1,5 @@
+package test;
+
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.lang.reflect.Method;
@@ -5,7 +7,7 @@ import java.lang.reflect.Method;
 public class ProjektTester {
     // Konfiguration eurer Hauptklasse. Bitte vollqualifizierten Klassennamen plus Paket angeben.
     // Z.b. die Klasse MeinProjekt im Paket dhbw.java, muss lauten: 'dhbw.java.MeinProjekt'
-    private static final String MAIN_CLASS = "Main";
+    private static final String MAIN_CLASS = "main.Main";
 
     public static void main(String[] args) {
         // project.model.Tests are passing
@@ -52,7 +54,7 @@ public class ProjektTester {
             mainMethod.invoke(null, (Object) args);
         } catch (Exception e) {
             e.printStackTrace();
-            System.err.println("Main-Klasse konnte nicht geladen werden, bitte Konfiguration pruefen.");
+            System.err.println("main.Main-Klasse konnte nicht geladen werden, bitte Konfiguration pruefen.");
             System.exit(1);
         } finally {
             // System.out wieder zuruecksetzen

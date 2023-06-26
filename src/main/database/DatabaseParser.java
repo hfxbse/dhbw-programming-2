@@ -1,4 +1,4 @@
-package database;
+package main.database;
 
 import java.io.*;
 import java.util.Arrays;
@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class DatabaseParser {
     static public void parse(File database, Map<String, EntryRegistration> entryRegistrations) throws IOException {
-        if (!database.canRead()) throw new IOException("Permission denied to read database file.");
+        if (!database.canRead()) throw new IOException("Permission denied to read main.database file.");
 
         BufferedReader input = new BufferedReader(new FileReader(database));
 

@@ -1,6 +1,6 @@
-package database.products;
+package main.database.products;
 
-import database.EntryRepository;
+import main.database.EntryRepository;
 
 public class ProductRepository extends EntryRepository<Product> {
     public static final String DATABASE_ENTRY_PATTERN = "\"product_id\",\"product_name\"";

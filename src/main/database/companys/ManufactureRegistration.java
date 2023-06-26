@@ -1,7 +1,7 @@
-package database.companys;
+package main.database.companys;
 
-import database.EntryRegistration;
-import database.products.ProductRepository;
+import main.database.EntryRegistration;
+import main.database.products.ProductRepository;
 
 public class ManufactureRegistration implements EntryRegistration {
     public static final String DATABASE_ENTRY_PATTERN = "\"product_id\",\"company_id\"";

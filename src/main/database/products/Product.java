@@ -1,6 +1,6 @@
-package database.products;
+package main.database.products;
 
-import database.Entry;
+import main.database.Entry;
 
 public class Product extends Entry {
     public Product(Integer id, String name) {
