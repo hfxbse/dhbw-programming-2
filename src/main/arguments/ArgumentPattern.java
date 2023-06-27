@@ -1,5 +1,10 @@
 package main.arguments;
 
+/**
+ * Describes an allowed command line argument.
+ * The value description is used for the help text.
+ * If numeric is true, only a whole number is considered a valid parameter value.
+ */
 public class ArgumentPattern {
     String key;
     String valueDescription;

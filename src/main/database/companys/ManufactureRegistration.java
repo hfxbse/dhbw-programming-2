@@ -14,6 +14,11 @@ public class ManufactureRegistration implements EntryRegistration {
         this.products = products;
     }
 
+    /**
+     * Adds a product to the manufacture.
+     *
+     * @param data Product ID and manufacture ID as a list of strings.
+     */
     @Override
     public void registerEntry(String[] data) {
         Integer product = Integer.parseInt(data[0]);

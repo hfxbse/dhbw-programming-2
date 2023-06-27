@@ -14,6 +14,11 @@ public class PurchaseRegistration implements EntryRegistration {
         this.products = products;
     }
 
+    /**
+     * Adds a product to a person.
+     *
+     * @param data Person ID and product ID as a list of strings.
+     */
     @Override
     public void registerEntry(String[] data) {
         Integer person = Integer.parseInt(data[0]);

@@ -24,6 +24,12 @@ public class Person extends Entry {
     final public Set<Person> friends = new HashSet<>();
     final public Set<Product> purchases = new HashSet<>();
 
+    /**
+     * Retrieves all products, which friends of the person bought and is not own by the person.
+     *
+     * @return Set of products, which have been bought by friends and are not already owned by the peron.
+     *         Empty if no such product exist.
+     */
     public Set<Product> productNetwork() {
         final Set<Product> products = new HashSet<>();
 
@@ -36,6 +42,12 @@ public class Person extends Entry {
         return products;
     }
 
+    /**
+     * Retrieves all manufactures, which friends of the person bought products from and the person has not bought from.
+     *
+     * @return Set of companies, which friends bought products from but not the person themselves.
+     *         Empty if no such company exist.
+     */
     public Set<Company> companyNetwork(CompanyRepository companyRepository) {
         final Set<Company> companies = new HashSet<>();
 

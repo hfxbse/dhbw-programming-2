@@ -11,6 +11,11 @@ public class FriendshipRegistration implements EntryRegistration {
         this.people = people;
     }
 
+    /**
+     * Adds a friend to both person in the friendship.
+     *
+     * @param data Two person IDs, one for each friend, list of strings.
+     */
     @Override
     public void registerEntry(String[] data) {
         Integer first = Integer.parseInt(data[0]);

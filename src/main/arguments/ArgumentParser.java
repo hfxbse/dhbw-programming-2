@@ -7,6 +7,12 @@ public class ArgumentParser {
     final private Map<String, ArgumentPattern> required = new HashMap<>();
     final private Map<String, ArgumentPattern> either = new HashMap<>();
 
+    /**
+     * Constructs a new argument parser.
+     *
+     * @param required List of argument patterns that need to be present to be considered valid.
+     * @param either   List of argument patterns, of which exactly one needs to be present to be considered valid.
+     */
     public ArgumentParser(ArgumentPattern[] required, ArgumentPattern[] either) {
         for (ArgumentPattern pattern : required) {
             setArgumentPattern(pattern, true);
@@ -17,6 +23,12 @@ public class ArgumentParser {
         }
     }
 
+    /**
+     * Creates the help text for the given argument patterns.
+     *
+     * @param patterns List of arguments from which to generate the help text.
+     * @return The generated help text.
+     */
     String getArgumentDescription(Collection<ArgumentPattern> patterns) {
         return String.join("\n", patterns
                 .stream()
@@ -25,6 +37,11 @@ public class ArgumentParser {
         );
     }
 
+    /**
+     * Create the help text for the current argument patterns.
+     *
+     * @return The generated help text.
+     */
     String getArgumentDescription() {
         String description = "";
 
@@ -44,6 +61,13 @@ public class ArgumentParser {
         return description;
     }
 
+    /**
+     * Adds a new argument pattern to the parser.
+     * If the argument key is already present, it will override the previous pattern configuration.
+     *
+     * @param pattern  The argument pattern to be added or overridden.
+     * @param required If the argument pattern is required or not.
+     */
     public void setArgumentPattern(ArgumentPattern pattern, boolean required) {
         if (required) {
             this.required.put(pattern.key, pattern);
@@ -52,6 +76,13 @@ public class ArgumentParser {
         }
     }
 
+    /**
+     * Parses the giving strings to a key-value map, in which the key is the key of the argument pattern and the
+     * matching value the argument value as trimmed text.
+     *
+     * @param args List of parameters as string.
+     * @return Key-Value map of the parameters if the parameter configuration was valid, else null.
+     */
     public Map<String, String> parse(String[] args) {
         final int count = required.size() + 1;
 
