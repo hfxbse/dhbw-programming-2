@@ -1,4 +1,4 @@
-package main.database.companys;
+package main.database.companies;
 
 import main.database.Entry;
 import main.database.products.Product;

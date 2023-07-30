@@ -1,8 +1,8 @@
 package main.database.people;
 
 import main.database.Entry;
-import main.database.companys.Company;
-import main.database.companys.CompanyRepository;
+import main.database.companies.Company;
+import main.database.companies.CompanyRepository;
 import main.database.products.Product;
 
 import java.util.HashSet;

@@ -1,7 +1,7 @@
 package test.database.companys;
 
-import main.database.companys.CompanyRepository;
-import main.database.companys.ManufactureRegistration;
+import main.database.companies.CompanyRepository;
+import main.database.companies.ManufactureRegistration;
 import main.database.products.ProductRepository;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;

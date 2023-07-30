@@ -1,7 +1,7 @@
 package test.database.people;
 
-import main.database.companys.Company;
-import main.database.companys.CompanyRepository;
+import main.database.companies.Company;
+import main.database.companies.CompanyRepository;
 import main.database.people.PeopleRepository;
 import main.database.products.Product;
 import main.database.products.ProductRepository;
