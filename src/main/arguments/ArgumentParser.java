@@ -29,7 +29,7 @@ public class ArgumentParser {
      * @param patterns List of arguments from which to generate the help text.
      * @return The generated help text.
      */
-    String getArgumentDescription(Collection<ArgumentPattern> patterns) {
+    public String getArgumentDescription(Collection<ArgumentPattern> patterns) {
         return String.join("\n", patterns
                 .stream()
                 .map(pattern -> String.format("--%s=<%s>", pattern.key, pattern.valueDescription))
@@ -42,7 +42,7 @@ public class ArgumentParser {
      *
      * @return The generated help text.
      */
-    String getArgumentDescription() {
+    public String getArgumentDescription() {
         String description = "";
 
         if (!required.isEmpty()) {

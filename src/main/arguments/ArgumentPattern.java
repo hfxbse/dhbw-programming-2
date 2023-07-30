@@ -6,9 +6,9 @@ package main.arguments;
  * If numeric is true, only a whole number is considered a valid parameter value.
  */
 public class ArgumentPattern {
-    String key;
-    String valueDescription;
-    boolean numeric;
+    public String key;
+    public String valueDescription;
+    public boolean numeric;
 
     public ArgumentPattern(String key, String valueDescription) {
         this(key, valueDescription, false);
