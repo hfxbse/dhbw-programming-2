@@ -1,0 +1,160 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+skinparam classAttributeIconSize 0
+
+left to right direction
+
+set namespaceSeparator none
+
+Main "1" --o  DatabaseParser
+Main --* "1" PeopleRepository
+Main --* "1" CompanyRepository
+Main --* "1" PurchaseRegistration
+Main --* "1" FriendshipRegistration
+Main --* "1" ProductRepository
+Main --* "1" ManufactureRegistration
+Main --* "1" ArgumentParser
+
+PeopleRepository --o "*" Person
+CompanyRepository --o "*" Company
+ProductRepository --o "*" Product
+ArgumentParser --o "*" ArgumentPattern
+
+Person -- Gender
+Person --o "*" Product
+Person --o "*" Person
+
+Company --o "*" Product
+
+!define NAME(name,package) "name\n<size:10><b>package.name<b>" as name
+
+enum NAME(Gender, main.database.people.Person) {
+    MALE
+    FEMALE
+}
+
+class NAME(FriendshipRegistration, main.database.people) implements EntryRegistration {
+    + DATABASE_ENTRY_PATTERN : String {readOnly}
+    + people : PeopleRepository
+
+    + FriendshipRegistration(people : PeopleRepository) <<Constructor>>
+    + registerEntry(data : String[])
+}
+
+class NAME(PurchaseRegistration, main.database.people) implements EntryRegistration {
+    + DATABASE_ENTRY_PATTERN : String {readOnly}
+    + people : PeopleRepository
+    + products : ProductRepository
+
+    + PurchaseRegistration(people : PeopleRepository, products : ProductRepository) <<Constructor>>
+    + registerEntry(data : String[])
+}
+
+class NAME(Person, main.database.people) extends Entry {
+    + gender : Gender
+    + friends : Set<Person>
+    + purchases : Set<Product>
+
+    + Person(Integer id, String name, Gender gender) <<Constructor>>
+    + productNetwork() : Set<Product>
+    + companyNetwork(companyRepository : CompanyRepository) : Set<Company>
+    + toString() : String
+}
+
+
+class NAME(PeopleRepository, main.database.people) extends Entry  {
+    + DATABASE_ENTRY_PATTERN : String {readOnly}
+
+    + createEntry(id : Integer, data : String[]) : Person
+}
+
+
+class NAME(Company, main.database.companies) extends Entry {
+    + products : Set<Product>
+
+    + toString() : String
+}
+
+
+class NAME(CompanyRepository, main.database.companies) extends EntryRepository {
+    + DATABASE_ENTRY_PATTERN : String {readOnly}
+
+    + findManufacture(product : Product) : Company
+    + createEntry(id : Integer, data : String[]) : Company
+}
+
+class NAME(ManufactureRegistration, main.database.companies) implements EntryRegistration {
+    + DATABASE_ENTRY_PATTERN : String {readOnly}
+
+    + companies : CompanyRepository
+    + products : ProductRepository
+
+    + ManufactureRegistration(companies : CompanyRepository, products : ProductRepository) <<Constructor>>
+
+   + registerEntry(data : String[])
+}
+
+class NAME(ProductRepository, main.database.products) extends EntryRepository {
+    + DATABASE_ENTRY_PATTERN : String {readOnly}
+
+    + createEntry(id : Integer, data : String[]) : Product
+}
+
+abstract class NAME(Entry, main.database) {
+    - id : Integer
+    - name : String
+
+    + Entry(id : Integer, name: String) <<Constructor>>
+    + toString() : String
+}
+
+interface NAME(EntryRegistration, main.database) {
+    + registerEntry(data : String[])
+}
+
+abstract class NAME(EntryRepository, main.database) {
+    # entries : Map<Integer, T>
+
+    + createEntry(id : Integer, data : String[]) : T
+    + registerEntry(data : String[])
+    + getById(id : Integer) : T
+    + findByName(query : String) : List<T>
+    + iterator() : Iterator<T>
+    + forEach(action : Consumer<? super T>)
+    + spliterator() : Spliterator<T>
+}
+
+class NAME(DatabaseParser, main.database) {
+    + parse(database : File, entryRegistrations : Map<String, EntryRegistration>)
+}
+
+class NAME(Product, main.database.products) extends Entry {
+    + Product(id : Integer, name : String) <<Constructor>>
+    + toString() : String
+}
+
+class NAME(Main, main) {
+    - argumentParser : ArgumentParser
+    + main(String[] args)
+}
+
+class NAME(ArgumentParser, main.arguments) {
+    - required[] : ArgumentPattern
+    - either[] : ArgumentPattern
+    + getArgumentDescription() : String
+    + getArgumentDescription(pattern : ArgumentPattern) : String
+    + setArgumentPattern(pattern : ArgumentPattern, required : boolean)
+    + parse(args : String[]) : Map<String, String>
+}
+
+class NAME(ArgumentPattern, main.arguments) {
+    + key: String
+    + valueDescription: String
+    + numeric: boolean
+
+    + ArgumentPattern(key : String, valueDescription : String) <<Constructor>>
+    + ArgumentPattern(key : String, valueDescription : String, numeric : boolean) <<Constructor>>
+}
+
+@enduml
